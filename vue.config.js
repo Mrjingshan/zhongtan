@@ -2,7 +2,7 @@
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, dir)
 }
 
@@ -24,7 +24,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/zhongtang-admin/',
+  publicPath: './',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -47,7 +47,7 @@ module.exports = {
         }
       }
     },
-    after: require('./mock/mock-server.js')
+    // after: require('./mock/mock-server.js')
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -59,9 +59,9 @@ module.exports = {
       }
     }
   },
-  chainWebpack(config) {
-    config.plugins.delete('preload') 
-    config.plugins.delete('prefetch') 
+  chainWebpack (config) {
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
 
     // set svg-sprite-loader
     config.module
@@ -91,7 +91,7 @@ module.exports = {
       })
       .end()
     config
-    // https://webpack.js.org/configuration/devtool/#development
+      // https://webpack.js.org/configuration/devtool/#development
       .when(process.env.NODE_ENV === 'development',
         config => config.devtool('cheap-source-map')
       )
@@ -103,7 +103,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()

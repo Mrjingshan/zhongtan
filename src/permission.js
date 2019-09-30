@@ -10,17 +10,21 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
 // router守卫(此处进行权限校验)
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   NProgress.start()
   document.title = getPageTitle(to.meta.title)
   const hasToken = getToken()
-
+  // const hasToken = store.getters.token
+  console.log(`hasToken=${hasToken}`);
   if (hasToken) {
+    console.log(`to=${to}`);
     if (to.path === '/login') {
+      console.log(1);
       next({ path: '/' })
       NProgress.done()
     } else {
-     
+      console.log(2);
+      // 判断是否有路由
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
         next()

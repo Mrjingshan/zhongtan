@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -25,7 +25,7 @@ service.interceptors.request.use(
   },
   error => {
     // do something with request error
-    console.log(error) // for debug
+    // console.log(error) // for debug
     return Promise.reject(error)
   }
 )
@@ -73,7 +73,7 @@ service.interceptors.response.use(
     return res
   },
   error => {
-    console.log('err' + error) // for debug
+    // console.log('err' + error) // for debug
     Message({
       message: error.message,
       type: 'error',

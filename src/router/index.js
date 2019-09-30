@@ -31,6 +31,7 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
+
   {
     path: '/login',
     component: () => import('@/views/login'),
@@ -164,6 +165,7 @@ export const asyncRoutes = [
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
+  mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
@@ -171,7 +173,7 @@ const createRouter = () => new Router({
 const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
-export function resetRouter() {
+export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
