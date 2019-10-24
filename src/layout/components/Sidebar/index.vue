@@ -28,9 +28,8 @@ export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
-      'permission_routes',
-      'sidebar'
-    ]),
+      'permission_routes', 'sidebar'
+]),
     activeMenu() {
       const route = this.$route
       const { meta, path } = route

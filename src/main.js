@@ -1,10 +1,10 @@
 import Vue from 'vue'
 
-import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+import 'normalize.css/normalize.css' //标准化css
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+import locale from 'element-ui/lib/locale/lang/en'
 
 import '@/styles/index.scss' // global css
 
@@ -14,15 +14,16 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-
+import service from './utils/request'
+import '../mock/mock'
+Vue.prototype.service = service
 // import { mockXHR } from '../mock'
 // if (process.env.NODE_ENV === 'production') {
 //   mockXHR()
 // }
 
-// set ElementUI lang to EN
+// ElementUI 中文化
 Vue.use(ElementUI, { locale })
-
 Vue.config.productionTip = false
 
 new Vue({

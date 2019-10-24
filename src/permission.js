@@ -15,15 +15,11 @@ router.beforeEach(async (to, from, next) => {
   document.title = getPageTitle(to.meta.title)
   const hasToken = getToken()
   // const hasToken = store.getters.token
-  console.log(`hasToken=${hasToken}`);
   if (hasToken) {
-    console.log(`to=${to}`);
     if (to.path === '/login') {
-      console.log(1);
       next({ path: '/' })
       NProgress.done()
     } else {
-      console.log(2);
       // 判断是否有路由
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
@@ -32,13 +28,10 @@ router.beforeEach(async (to, from, next) => {
         try {
           // roles 必须是数组 例如['admin'] or ,['developer','editor']
           const { roles } = await store.dispatch('user/getInfo')
-
           // 将角色信息传入VX,进行角色界定和分配路由
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-
           // 添加动态路由
           router.addRoutes(accessRoutes)
-
           // hack方法 确保路由加载完毕加载路由
           next({ ...to, replace: true })
         } catch (error) {

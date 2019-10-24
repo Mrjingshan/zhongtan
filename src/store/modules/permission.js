@@ -24,6 +24,7 @@ function hasPermission (roles, route) {
  * @param roles
  */
 function filterAsyncRouter (asyncRouterMap) { //遍历后台传来的路由字符串，转换为组件对象
+
   const accessedRouters = asyncRouterMap.filter(route => {
     if (route.component) {
       switch (route.component) {
@@ -59,14 +60,8 @@ const mutations = {
 
 const actions = {
   generateRoutes ({ commit }, roles) {
-    var url;
-    if (roles[0] === "admin") {
-      url = 'https://www.easy-mock.com/mock/5b69b69ef770e33d7c1342a5/example/123456'
-    } else {
-      url = 'https://www.easy-mock.com/mock/5b69b69ef770e33d7c1342a5/example/qijingshanrouter'
-    }
     return new Promise(resolve => {
-      getRoute(url).then(res => {
+      getRoute(roles).then(res => {
         let accessedRoutes
         // 根据角色生成对应权限的路由
         accessedRoutes = filterAsyncRouter(res.data.route)
@@ -75,8 +70,6 @@ const actions = {
       }).catch(error => {
         console.log(error);
       });
-
-
     })
   }
 }
